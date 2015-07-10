@@ -1,0 +1,7 @@
+[run]
+branch = True
+source = pystb
+omit = pystb/openstack/*
+
+[report]
+ignore-errors = True
