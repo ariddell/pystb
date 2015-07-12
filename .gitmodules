@@ -1,0 +1,3 @@
+[submodule "pystb/libstb"]
+	path = pystb/libstb
+	url = https://github.com/wbuntine/libstb
