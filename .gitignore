@@ -52,3 +52,9 @@ ChangeLog
 *~
 .*.swp
 .*sw?
+
+# Cython generated C source code
+pystb/stable.c
+
+# Project-specific
+.testrepository
