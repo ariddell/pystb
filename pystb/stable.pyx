@@ -24,8 +24,8 @@ cdef extern from "stable.h":
 cdef class STable:
     cdef stable_t * thisptr
 
-    def __cinit__(self):
-        self.thisptr = S_make(100, 100, 1000, 1000, 0, S_STABLE | S_UVTABLE)
+    def __cinit__(self, unsigned max_n, unsigned max_m, double a):
+        self.thisptr = S_make(max_n, max_m, max_n, max_m, a, S_STABLE | S_UVTABLE)
         if not self.thisptr:
             raise MemoryError("Couldn't allocate memory for STable")
 
