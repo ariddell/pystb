@@ -8,4 +8,5 @@ class TestPystb(base.TestCase):
 
     def test_basic(self):
         stable = pystb.STable(100, 100, 0)
-        self.assertAlmostEqual(stable.S(6, 3), math.log(225))
+        self.assertAlmostEqual(stable.S(6, 3), math.log(225), places=5)
+        self.assertAlmostEqual(stable[6, 3], math.log(225), places=5)
