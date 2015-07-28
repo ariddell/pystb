@@ -50,13 +50,13 @@ cdef class STable:
         max_n (int): Maximum `n` to calculate
         max_m (int): Maximum `m` to calculate
     """
-    def __cinit__(self, unsigned max_n, unsigned max_m, double a):
-    cdef stable_t * thisptr
-    cdef public max_n
-    cdef public max_m
+    cdef:
+        stable_t * thisptr
+        public max_n
+        public max_m
 
     def __cinit__(self, unsigned max_n, unsigned max_m, double a):
-        self.thisptr = S_make(max_n, max_m, max_n, max_m, a, S_STABLE|S_UVTABLE|S_FLOAT|S_QUITONBOUND)
+        self.thisptr = S_make(10, 10, max_n, max_m, a, S_STABLE|S_UVTABLE|S_FLOAT|S_QUITONBOUND)
         self.max_n = max_n
         self.max_m = max_m
         if not self.thisptr:
@@ -86,9 +86,11 @@ cdef class STable:
         S_free(self.thisptr)
 
     def __str__(self):
-        cdef FILE* fp
-        cdef char buf[1024]
-        cdef size_t num_read
+        cdef:
+            FILE* fp
+            char buf[1024]
+            size_t num_read
+
         memset(buf, 0, sizeof(buf))
         fp = tmpfile()
         S_report(self.thisptr, fp)
