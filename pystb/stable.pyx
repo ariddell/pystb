@@ -26,7 +26,31 @@ cdef extern from "stable.h":
     int S_THREADS
 
 
+# NOTE: keep docstrings in sync with documentation in doc/source/
 cdef class STable:
+    """Table of pre-calculated generalised Stirling numbers of the second kind.
+
+    For fixed ``a``, pre-calculate all Stirling numbers of the second kind with
+    the following form:
+
+    .. math::
+        S^n_{m,a}
+
+    The maximum ``n`` and maximum ``m`` values must be specified in advance
+    as well.
+
+    Example:
+
+    >>> import pystb
+    >>> stable = pystb.STable(100, 100, 0.5)
+    >>> stable.S(5, 3)  # S^5_{3, 0.5}
+    >>> stable[5, 3]  # alias for stable.S(5, 3)
+
+    Attributes:
+        max_n (int): Maximum `n` to calculate
+        max_m (int): Maximum `m` to calculate
+    """
+    def __cinit__(self, unsigned max_n, unsigned max_m, double a):
     cdef stable_t * thisptr
     cdef public max_n
     cdef public max_m
