@@ -4,6 +4,8 @@ import os
 import sys
 
 sys.path.insert(0, os.path.abspath('../..'))
+sys.path.insert(0, os.path.abspath('sphinxext'))  # for sphinx_cython.py
+
 # -- General configuration ----------------------------------------------------
 
 # Add any Sphinx extension module names here, as strings. They can be
@@ -11,8 +13,13 @@ sys.path.insert(0, os.path.abspath('../..'))
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
+    'sphinx_cython',
+    'sphinx.ext.mathjax',
+    'sphinx.ext.autosummary',
     #'sphinx.ext.intersphinx',
 ]
+
+autosummary_generate = True
 
 # autodoc generation is a bit aggressive and a nuisance when doing heavy
 # text edit cycles.
