@@ -53,11 +53,11 @@ cdef class STable:
         stable_t * thisptr
         public unsigned int max_n
         public unsigned int max_m
+        public double a
 
     def __cinit__(self, unsigned int max_n, unsigned int max_m, double a):
+        self.max_n, self.max_m, self.a = max_n, max_m, a
         self.thisptr = S_make(10, 10, max_n, max_m, a, S_STABLE|S_UVTABLE|S_FLOAT|S_QUITONBOUND)
-        self.max_n = max_n
-        self.max_m = max_m
         if not self.thisptr:
             raise MemoryError("Couldn't allocate memory for STable.")
 
@@ -65,12 +65,11 @@ cdef class STable:
         """:math:`log S^n_{m, a}`"""
         if n > self.max_n or m > self.max_m:
             raise ValueError("Indices exceed table bounds.")
-        if m == 1:
-            return S_S1(self.thisptr, n)
-        return S_S(self.thisptr, n, m)
+        return S_S1(self.thisptr, n) if m == 1 else S_S(self.thisptr, n, m)
 
     def S1(self, unsigned int n, unsigned int m):
-        """:math:`log S^n_{1, a}`"""
+        """:math:`log S^n_{1, a}` for n >= 1"""
+        assert n >= 1
         if n > self.max_n:
             raise ValueError("Indices exceed table bounds.")
         return S_S1(self.thisptr, n)
