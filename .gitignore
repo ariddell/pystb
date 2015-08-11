@@ -54,7 +54,7 @@ ChangeLog
 .*sw?
 
 # Cython generated C source code
-pystb/stable.c
+pystb/*.c
 
 # Project-specific
 .testrepository
